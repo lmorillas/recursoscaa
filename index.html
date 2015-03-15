@@ -84,11 +84,9 @@
                 <div data-ex-role="view" data-ex-label="Software Educativo" data-ex-view-class="Tabular" data-ex-columns=".label, .imagen" data-ex-column-labels="Título, Imagen"  data-ex-sort-column="1" data-ex-sort-ascending="true" data-ex-table-styler="tableStyler" data-ex-paginate="true" data-ex-page-size="25" >
                         <table style="display: none;">
                             <tr>
-                                <td style="width: 80%"><p><strong><a data-ex-href-content="concat('http://es.slideshare.net', .url)" data-ex-title-content=".desc"><span data-ex-content=".label"></span></a></strong></p>
-
-
+                                <td style="width: 80%"><p><strong><a data-ex-href-content="concat('http://es.slideshare.net', .url)"><span data-ex-content=".label"></span></a></strong></p>
                                 <p data-ex-content=".desc"></p></td>
-                                <td><img class="img-responsive" data-ex-src-content="concat('http://image.slidesharecdn.com/', .imagen)" alt="Imagen AAC"></img></td>
+                                <td><a data-ex-href-content="concat('http://es.slideshare.net', .url)"><img class="img-responsive" data-ex-src-content="concat('http://image.slidesharecdn.com/', .imagen)" alt="Imagen AAC"></img></a></td>
                             </tr>
                         </table>
                     </div>
