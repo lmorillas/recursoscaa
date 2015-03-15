@@ -72,8 +72,9 @@
         <div class="row">
 
             <div class="col-sm-3">
-                <div class="ext_search" data-ex-role="exhibit-facet" data-ex-facet-class="TextSearch" data-ex-facet-label="Buscar recursos">
+                <div class="ext_search" data-ex-role="exhibit-facet" data-ex-facet-class="TextSearch" data-ex-facet-label="Buscar recursos" data-ex-expressions=".label, .desc">
                 </div>
+                <div class="ext_search" data-ex-role="exhibit-facet" data-ex-facet-class="TextSearch" data-ex-facet-label="Buscar por autor" data-ex-expressions=".autor"> </div>
                  <div data-ex-role="exhibit-facet" data-ex-expression=".autor" data-ex-facet-label="Autor" data-ex-collapsible="true"></div>
 
 
@@ -83,9 +84,11 @@
                 <div data-ex-role="view" data-ex-label="Software Educativo" data-ex-view-class="Tabular" data-ex-columns=".label, .imagen" data-ex-column-labels="Título, Imagen"  data-ex-sort-column="1" data-ex-sort-ascending="true" data-ex-table-styler="tableStyler" data-ex-paginate="true" data-ex-page-size="25" >
                         <table style="display: none;">
                             <tr>
-                                <td style="width: 80%"><p><strong><a data-ex-href-content=".url" data-ex-title-content=".desc"><span data-ex-content=".label"></span></a></strong></p>
+                                <td style="width: 80%"><p><strong><a data-ex-href-content="concat('http://es.slideshare.net', .url)" data-ex-title-content=".desc"><span data-ex-content=".label"></span></a></strong></p>
+
+
                                 <p data-ex-content=".desc"></p></td>
-                                <td><img class="img-responsive" data-ex-src-content=".imagen" alt="Imagen AAC"></img></td>
+                                <td><img class="img-responsive" data-ex-src-content="concat('http://image.slidesharecdn.com/', .imagen)" alt="Imagen AAC"></img></td>
                             </tr>
                         </table>
                     </div>
