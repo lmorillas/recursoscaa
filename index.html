@@ -34,7 +34,8 @@
     .exhibit-facet-value {
         font-size: smaller;
     }
-    .exhibit-facet-header, .exhibit-cloudFacet-header {
+    .exhibit-facet-header,
+    .exhibit-cloudFacet-header {
         margin-top: 12px;
     }
     div.exhibit-legendWidget > div.exhibit-color-legend > div > div > span.label {
@@ -45,6 +46,10 @@
     }
     .row {
         margin-top: 4em;
+    }
+
+    img.w {
+        width: 90%;
     }
     </style>
 
@@ -61,12 +66,15 @@
 </head>
 
 <body>
-
-
     <div class="container-fluid">
-        <div class="col-sm-8 center-block titulo" style="float:none;">
-            <h1>Recusos AAC en Slideshare</h1>
+        <div class="row">
+            <div class="col-sm-3">
+                <img class="img-responsive" src="arasaac_titulo.png" alt="arasaac">
+            </div>
+            <div class="col-sm-8 titulo">
+                <h1>Recusos AAC en Slideshare</h1>
                 <p>Información extraída de <a href="http://es.slideshare.net">http://es.slideshare.net</a> </p>
+            </div>
         </div>
 
         <div class="row">
@@ -75,31 +83,37 @@
                 <div class="ext_search" data-ex-role="exhibit-facet" data-ex-facet-class="TextSearch" data-ex-facet-label="Buscar recursos" data-ex-expressions=".label, .desc">
                 </div>
                 <div class="ext_search" data-ex-role="exhibit-facet" data-ex-facet-class="TextSearch" data-ex-facet-label="Buscar por autor" data-ex-expressions=".autor"> </div>
-                 <div data-ex-role="exhibit-facet" data-ex-expression=".autor" data-ex-facet-label="Autor" data-ex-collapsible="true" data-ex-sort-mode="count"></div>
+                <div data-ex-role="exhibit-facet" data-ex-expression=".autor" data-ex-facet-label="Autor" data-ex-collapsible="true" data-ex-sort-mode="count"></div>
 
 
             </div>
 
             <div class="col-sm-9">
-                <div data-ex-role="view" data-ex-label="Software Educativo" data-ex-view-class="Tabular" data-ex-columns=".label, .imagen" data-ex-column-labels="Título, Imagen"  data-ex-sort-column="1" data-ex-sort-ascending="true" data-ex-table-styler="tableStyler" data-ex-paginate="true" data-ex-page-size="25" >
-                        <table style="display: none;">
-                            <tr>
-                                <td style="width: 80%"><p><strong><a data-ex-href-content="concat('http://es.slideshare.net', .url)"><span data-ex-content=".label"></span></a></strong></p>
-                                <p data-ex-content=".desc"></p></td>
-                                <td><a data-ex-href-content="concat('http://es.slideshare.net', .url)"><img class="img-responsive" data-ex-src-content="concat('http://image.slidesharecdn.com/', .imagen)" alt="Imagen AAC"></img></a></td>
-                            </tr>
-                        </table>
-                    </div>
+                <div data-ex-role="view" data-ex-label="Software Educativo" data-ex-view-class="Tabular" data-ex-columns=".label, .imagen" data-ex-column-labels="Título, Imagen" data-ex-sort-column="1" data-ex-sort-ascending="true" data-ex-table-styler="tableStyler" data-ex-paginate="true" data-ex-page-size="25">
+                    <table style="display: none;">
+                        <tr>
+                            <td style="width: 80%">
+                                <p><strong><a data-ex-href-content="concat('http://es.slideshare.net', .url)"><span data-ex-content=".label"></span></a></strong>
+                                </p>
+                                <p data-ex-content=".desc"></p>
+                            </td>
+                            <td>
+                                <a data-ex-href-content="concat('http://es.slideshare.net', .url)"><img class="img-responsive w" data-ex-src-content="concat('http://image.slidesharecdn.com/', .imagen)" alt="Imagen AAC"></img>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
 
 
             </div>
-
-            </div>
-            <footer>
-                <a href="https://github.com/lmorillas">By @lmorillas</a>
-            </footer>
 
         </div>
+        <footer>
+            <a href="https://github.com/lmorillas">By @lmorillas</a>
+        </footer>
+
+    </div>
 </body>
 
 </html>
