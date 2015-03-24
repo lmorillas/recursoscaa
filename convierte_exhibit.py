@@ -5,23 +5,25 @@ import json
 k = []
 items = []
 
-text = open('slide.json').read()
+historico = json.load(open('historico.json'))
+hurls = [h.get('url') for h in historico]
 
-text = text.replace('][', ',')
-n = json.loads(text)
+nuevas = json.load(open('slide.json'))
 
-for x in n:
+for x in nuevas:
     l = x.get('url')
-    if l not in k:
-        items.append(x)
-        k.append(l)
+    if l not in hurls:
+        historico.append(x)
+        hurls.append(l)
 
+#save historico
+json.dump(historico, open('historico.json', 'w'))
 
 # add id
-for n, i in enumerate(items):
+for n, i in enumerate(historico):
     i['id'] = n
 
-datos = {"items": items,
+datos = {"items": historico,
         "types": {
             "Item": {
                 "label": "recurso",
@@ -31,4 +33,4 @@ datos = {"items": items,
         "properties": {"plays": {"valueType": "number"}}
         }
 
-json.dump(datos, open('slide.js', 'w'))
+json.dump(datos, open('datos.json', 'w'))

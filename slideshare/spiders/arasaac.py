@@ -2,11 +2,13 @@
 import scrapy
 from urlparse import urljoin, urlparse
 from slideshare.items import SlideshareItem
-
+import json
 
 BASE = 'http://es.slideshare.net/'
 
 
+historico = json.load(open('historico.json'))
+urls = [h.get('url') for h in historico]
 
 class ArasaacSpider(scrapy.Spider):
     name = "arasaac"
@@ -27,6 +29,9 @@ class ArasaacSpider(scrapy.Spider):
             self.item[dato] = x[0].extract().strip()
 
     def parse(self, response):
+        if urlparse(response.url).path in urls:
+            return
+
         if 'slideshare.net/search/' in response.url:
             siguientes = response.selector.xpath(u'//a[contains(@class, "iso_slideshow_link")]/@href').extract()
             for s in siguientes:
