@@ -1,0 +1,7 @@
+.scrapy
+env
+*py
+*pyc
+*~
+slideshare
+*.old
