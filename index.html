@@ -9,7 +9,7 @@
     <meta name="og:description" content="Arasaac Slideshare">
     <meta name="keywords" content="recursos arasaac slideshare">
     <!-- Datos + importadores -->
-    <link href="datos.json" type="application/json" rel="exhibit-data" />
+    <link href="datos.json" type="application/json" rel="exhibit-data" data-ex-converter="addYear">
     <!-- libs simile-exhibit -->
     <script src="http://api.simile-widgets.org/exhibit/HEAD/lib/jquery-1.7.2.min.js" type="text/javascript">
     </script>
@@ -56,10 +56,36 @@
         $("input").addClass("form-control");
     });
     </script>
+    <script>
+    $(document).bind("scriptsLoaded.exhibit", function() {
+            Exhibit.FunctionUtilities.registerSimpleMappingFunction("yearOf",
+                function(d) {
+                    return d.split('-')[0];
+     //code to extract year from ISO date
+                    },
+                "number");
+               });
+    </script>
     <script type="text/javascript">
+
     var tableStyler = function(table, database) {
         $(table).addClass("table table-hover");
     };
+    </script>
+    <script type="text/javascript">
+    function addYear(json) {
+        var items = json.items;
+        for (var i = 0; item = items[i]; i++) {
+            items[i].year = Exhibit.DateTime.parseIso8601DateTime(item.fecha).getFullYear();
+        }
+        return json;
+    }
+    </script>
+    <script type="text/javascript">
+    function dameYear(fecha) {
+        var date = new Date(fecha);
+        return date.getFullYear();
+    }
     </script>
 </head>
 
@@ -81,22 +107,20 @@
                 <div class="ext_search" data-ex-role="exhibit-facet" data-ex-facet-class="TextSearch" data-ex-facet-label="Buscar por autor" data-ex-expressions=".autor"> </div>
                 <div data-ex-role="exhibit-facet" data-ex-expression=".autor" data-ex-facet-label="Autor" data-ex-collapsible="true" data-ex-sort-mode="count"></div>
                 <div data-ex-role="exhibit-facet" data-ex-expression=".lang" data-ex-facet-label="Idioma" data-ex-collapsible="true"></div>
+                <div data-ex-role="exhibit-facet" data-ex-expression="yearOf(.fecha)" data-ex-facet-label="Año" data-ex-collapsible="true"></div>
             </div>
             <div class="col-xs-9">
                 <div data-ex-role="viewPanel">
-                    <div data-ex-role="view" data-ex-label="Lista de materiales" data-ex-view-class="Tabular" data-ex-columns=".plays, .label, .imagen" data-ex-column-labels="Vistas, Título, Imagen"  data-ex-table-styler="tableStyler" data-ex-paginate="true" data-ex-page-size="25"
-                    data-ex-column-formats="number, text, text"
-                    data-ex-sort-ascending="false"
-                    >
+                    <div data-ex-role="view" data-ex-label="Lista de materiales" data-ex-view-class="Tabular" data-ex-columns=".plays, .label, .imagen" data-ex-column-labels="Vistas, Título, Imagen" data-ex-table-styler="tableStyler" data-ex-paginate="true" data-ex-page-size="25" data-ex-column-formats="number, text, text" data-ex-sort-ascending="false">
                         <table style="display: none;">
-                            <tr><td style="width: 5%"><span data-ex-content=".plays"></span></td>
+                            <tr>
+                                <td style="width: 5%"><span data-ex-content=".plays"></span></td>
                                 <td style="width: 70%">
                                     <p><strong><a data-ex-href-content="concat('http://es.slideshare.net', .url)">
                                     <span data-ex-content=".label"></span></a></strong>
                                     </p>
                                     <p data-ex-content=".desc"></p>
                                 </td>
-
                                 <td>
                                     <a data-ex-href-content="concat('http://es.slideshare.net', .url)"><img class="img-responsive w" data-ex-src-content="concat('http://image.slidesharecdn.com/', .imagen)" alt="Imagen AAC"></img>
                                     </a>
@@ -104,37 +128,38 @@
                             </tr>
                         </table>
                     </div>
-                    <div data-ex-role="view" data-ex-view-class="Timeline" data-ex-start=".fecha" data-ex-label="Cronología" >
+                    <div data-ex-role="view" data-ex-view-class="Timeline" data-ex-start=".fecha" data-ex-label="Cronología">
                         <div data-ex-role="lens" class="timeline-lens" style="display: none;">
                             <!--<img class="" data-ex-src-content="concat('http://image.slidesharecdn.com/', .imagen)" alt="Imagen AAC"></img>-->
                             <div>
-                            <table class="details table table-striped">
-                                <tr>
-                                    <td class="property">Título:</td>
-                                    <td><a data-ex-href-content="concat('http://es.slideshare.net', .url)"><span data-ex-content=".label"></span> </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="property">Autor:</td>
-                                    <td>
-                                        <span data-ex-content=".autor"></span>
-                                        </td></tr>
-                                <tr><td class="property">Imagen:</td><td>
-                                        <img class="img-responsive w" data-ex-src-content="concat('http://image.slidesharecdn.com/', .imagen)" alt="Imagen AAC"></img>
-
-                                    </td>
-                                </tr>
-                            </table>
+                                <table class="details table table-striped">
+                                    <tr>
+                                        <td class="property">Título:</td>
+                                        <td><a data-ex-href-content="concat('http://es.slideshare.net', .url)"><span data-ex-content=".label"></span> </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="property">Autor:</td>
+                                        <td>
+                                            <span data-ex-content=".autor"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="property">Imagen:</td>
+                                        <td>
+                                            <img class="img-responsive w" data-ex-src-content="concat('http://image.slidesharecdn.com/', .imagen)" alt="Imagen AAC"></img>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <footer>
+                <a href="https://github.com/lmorillas">By @lmorillas</a>
+            </footer>
         </div>
-        <footer>
-            <a href="https://github.com/lmorillas">By @lmorillas</a>
-        </footer>
-    </div>
 </body>
 
 </html>
