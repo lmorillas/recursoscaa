@@ -13,7 +13,7 @@ BOT_NAME = 'slideshare'
 SPIDER_MODULES = ['slideshare.spiders']
 NEWSPIDER_MODULE = 'slideshare.spiders'
 
-HTTPCACHE_ENABLED = True
+HTTPCACHE_ENABLED = False
 DOWNLOAD_DELAY = 0.50
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

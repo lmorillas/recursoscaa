@@ -36,7 +36,7 @@ class ArasaacSpider(scrapy.Spider):
             siguientes = response.selector.xpath(u'//a[contains(@class, "iso_slideshow_link")]/@href').extract()
             for s in siguientes:
                 path = urlparse(s).path
-                if path not in self.parsed:
+                if path not in self.parsed and path not in urls:
                     self.parsed.append(path)
                     yield scrapy.Request(urljoin(BASE, path))
         else:
