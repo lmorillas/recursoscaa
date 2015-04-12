@@ -5,3 +5,5 @@ env
 *~
 slideshare
 *.old
+slides.json
+tmp
