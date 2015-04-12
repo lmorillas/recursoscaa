@@ -1,7 +1,7 @@
 .scrapy
 *bak
 *~
-*.json.*
 *.pyc
 tmp
 env
+datos.json
