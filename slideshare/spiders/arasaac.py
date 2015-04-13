@@ -14,13 +14,14 @@ class ArasaacSpider(scrapy.Spider):
     name = "arasaac"
     allowed_domains = ["slideshare.net"]
 
-    _urlbase2 = 'http://es.slideshare.net/search/slideshow?lang=es&page={}&q=arasaac&sort=relevance'
-    _urlbase = 'http://es.slideshare.net/search/slideshow?ft=all&lang=%2A%2A&page={}&q=arasaac&qid=4941c245-759a-431d-9672-a730e03eb500&searchfrom=header&sort=&ud=year'
+    _urlbase = "http://es.slideshare.net/search/slideshow?ft=all&lang=**&page={}&q=arasaac&qid=c379a98f-bffa-47f9-8c4e-0bfc6c9efb7d&searchfrom=header&sort=&ud=month"
+    #_urlbase2 = 'http://es.slideshare.net/search/slideshow?lang=es&page={}&q=arasaac&sort=relevance'
+    #_urlbase = 'http://es.slideshare.net/search/slideshow?ft=all&lang=%2A%2A&page={}&q=arasaac&qid=4941c245-759a-431d-9672-a730e03eb500&searchfrom=header&sort=&ud=year'
     start_urls = [
         'http://es.slideshare.net/search/slideshow?searchfrom=header&q=arasaac',
         ]
-    start_urls.extend([_urlbase.format(x) for x in range(1, 300)])
-    start_urls.extend([_urlbase2.format(x) for x in range(1, 300)])
+    start_urls.extend([_urlbase.format(x) for x in range(1, 10)])
+    #start_urls.extend([_urlbase2.format(x) for x in range(1, 300)])
     parsed = []
 
     def extract(self, dato, path):
