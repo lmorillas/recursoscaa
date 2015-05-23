@@ -10,6 +10,8 @@ Recursos obtenidos por scraping de slideshare y preparados para visualizar con s
 ** educa2.madrid.org
 * youtube.com (1280)
 * blogspot.com.es 
+* http://laestanteriadedonnatalio.blogspot.com.es/
+
 
 # TODO
 * Uso de start_requests para optimizar el acceso al paginador
