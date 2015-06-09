@@ -9,7 +9,7 @@
     <meta name="og:description" content="Arasaac Slideshare">
     <meta name="keywords" content="recursos arasaac slideshare">
     <!-- Datos + importadores -->
-    <link href="datos.json" type="application/json" rel="exhibit-data" />
+    <link href="datos.json" type="application/json" rel="exhibit-data" data-ex-converter="addYear">
     <!-- libs simile-exhibit -->
     <script src="http://api.simile-widgets.org/exhibit/HEAD/lib/jquery.min.js" type="text/javascript">
     </script>
@@ -56,10 +56,40 @@
         $("input").addClass("form-control");
     });
     </script>
+    <script>
+    $(document).bind("scriptsLoaded.exhibit", function() {
+        Exhibit.FunctionUtilities.registerSimpleMappingFunction("yearOf",
+            function(d) {
+                return d.split('-')[0];
+            },
+            "number");
+    });
+    </script>
+    <script>
+    $(document).bind("dataload.exhibit", function() {
+        $("input").addClass("form-control");
+    });
+    </script>
+    </script>
     <script type="text/javascript">
     var tableStyler = function(table, database) {
         $(table).addClass("table table-hover");
     };
+    </script>
+    <script type="text/javascript">
+    function addYear(json) {
+        var items = json.items;
+        for (var i = 0; item = items[i]; i++) {
+            items[i].year = Exhibit.DateTime.parseIso8601DateTime(item.fecha).getFullYear();
+        }
+        return json;
+    }
+    </script>
+    <script type="text/javascript">
+    function dameYear(fecha) {
+        var date = new Date(fecha);
+        return date.getFullYear();
+    }
     </script>
 </head>
 
@@ -80,7 +110,10 @@
                 </div>
                 <div class="ext_search" data-ex-role="exhibit-facet" data-ex-facet-class="TextSearch" data-ex-facet-label="Buscar por autor" data-ex-expressions=".autor"> </div>
                 <div data-ex-role="exhibit-facet" data-ex-expression=".autor" data-ex-facet-label="Autor" data-ex-collapsible="true" data-ex-sort-mode="count"></div>
+                <!--  Lang tag is not ok :-(
                 <div data-ex-role="exhibit-facet" data-ex-expression=".lang" data-ex-facet-label="Idioma" data-ex-collapsible="true"></div>
+                -->
+                <div data-ex-role="exhibit-facet" data-ex-expression="yearOf(.fecha)" data-ex-facet-label="Año" data-ex-collapsible="true"></div>
             </div>
             <div class="col-xs-9">
                 <div data-ex-role="viewPanel">
@@ -101,7 +134,7 @@
                             </tr>
                         </table>
                     </div>
-                    <div data-ex-role="view" data-ex-view-class="Timeline" data-ex-start=".fecha" data-ex-label="Cronología"  data-ex-bottom-band-unit="month" data-ex-top-band-unit="day">
+                    <div data-ex-role="view" data-ex-view-class="Timeline" data-ex-start=".fecha" data-ex-label="Cronología" data-ex-bottom-band-unit="month" data-ex-top-band-unit="day">
                         <div data-ex-role="lens" class="timeline-lens" style="display: none;">
                             <!--<img class="" data-ex-src-content="concat('http://image.slidesharecdn.com/', .imagen)" alt="Imagen AAC"></img>-->
                             <div>
@@ -133,6 +166,22 @@
                 <a href="https://github.com/lmorillas">By @lmorillas</a>
             </footer>
         </div>
+        <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-1734348-14', 'auto');
+        ga('send', 'pageview');
+        </script>
 </body>
 
 </html>
